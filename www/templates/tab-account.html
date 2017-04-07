@@ -1,0 +1,189 @@
+<ion-view id="account" view-title="我的" hide-back-button="true" hide-nav-bar="true" cache-view="false">
+  <ion-header-bar class="bar-positive bar-profile">
+  
+    <div class="profile">
+      <!-- 用户头像 -->
+      <div class="profile-pic">
+        <div>
+          <a ng-href="#/editProfile">
+          <img ng-if="userinfo.touxiang==null" src="img/account/cy1.jpg">
+          <img src="{{userinfo.touxiang}}" alt="">
+          <!-- <img id="pic" src="{{userinfo.touxiang}}" alt=""> -->
+          <span ng-if="isMerchant" class="badge badge-assertive">{{isMerchant}}</span>
+          </a>
+        </div>
+        <p>{{userinfo.username}}</p>
+      </div>
+      <!-- 消费者身份等级 -->
+
+      <!-- user  property-->
+      <div class="user-property row">
+        <a href="#" class="col total">
+          <p>爱心</p>
+          <span>62000{{zjf}}</span>
+        </a>
+
+        <a href="#/integral" class="col back-money">
+          <p>购物豆</p>
+          <span>3000{{khgjf}}</span>
+        </a>
+
+        <a href="#/subsidy" class="col subsidy">
+          <p>冻结</p>
+          <span>1200.00{{btbz}}元</span>
+        </a>
+
+        <a ng-href="#/withdraw" class="col coin">
+          <p>可提</p>
+          <span>60.11{{userinfo.xiaofeibi}}元</span>
+        </a>
+      </div>
+ </div>
+
+ <button class="button button-clear pull-right ion-chatbubble-working">
+  <span class="badge hasMessage">0</span>
+</button>
+</ion-header-bar>
+<ion-content  class="has-header" has-bouncing="true">
+
+  <div class="moreInfo">
+    <button class="button button-light button-block iconfont icon-unfold" ng-click="showMore()">
+      我的更多信息
+    </button>
+  </div>
+  <div class="profile-text" ng-show="show">
+    <ion-list>
+      <ion-item class="icon iconfont icon-profile">我的推荐人:{{referbywho}}</ion-item>
+
+      <ion-item class="icon iconfont icon-location">本月消费总额度截止当前为{{userinfo.buysum+0}}元</ion-item>
+
+      <ion-item class="icon iconfont icon-location">本月消费赠送积分比例
+        <i ng-if="userinfo.buyerlevel==1||userinfo.buyerlevel==0||userinfo.buyerlevel==null">80%</i>
+        <i ng-if="userinfo.buyerlevel==2">100%</i>
+        <i ng-if="userinfo.buyerlevel==3">120%</i>
+      </ion-item>
+
+      <ion-item class="icon iconfont icon-location">本月推广商家提成
+        <i ng-if="userinfo.resellerlevel==1||userinfo.resellerlevel==0||userinfo.resellerlevel==null">0.5%</i>
+        <i ng-if="userinfo.resellerlevel==2">0.8%</i>
+        <i ng-if="userinfo.resellerlevel==3">1%</i>
+      </ion-item>
+
+      <ion-item class="icon iconfont icon-location">本月推广消费者直接提成
+        <i ng-if="userinfo.buyerlevel==1||userinfo.buyerlevel==0||userinfo.buyerlevel==null">0.5%</i>
+        <i ng-if="userinfo.buyerlevel==2">0.6%</i>
+        <i ng-if="userinfo.buyerlevel==3">0.7%</i>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- user Identity-->
+  <div class="identity-switch">
+    <a href="#/consumerInfo" ng-class="{'identity-btn':true, 'icon':true, 'iconfont':true,  'customer':true}" >消费者
+      <div class="star">
+      <i ng-repeat="temp in temp_leavl.jf0 | orderBy : temp :'desc' track by $index">
+        <i ng-if="temp==1" class="icon iconfont  ion-android-star"></i>
+        <i ng-if="temp==0" class="icon iconfont icon-favor identified"></i>
+      </i>
+      </div>
+    </a>
+
+  <a href="#/merchantInfo" ng-class="{'identity-btn':true, 'icon':true, 'iconfont':true,  'shop':merchant - 0}">商家
+   <!--  <div class="star">
+      <i ng-repeat="temp in temp_leavl.jf1 | orderBy : temp :'desc' track by $index">
+        <i ng-if="temp==1" class="icon iconfont  ion-android-star"></i>
+        <i ng-if="temp==0" class="icon iconfont icon-favor identified"></i>
+      </i>
+    </div> -->
+  </a>
+
+  <a href="#/extentionInfo" ng-class="{'identity-btn':true, 'icon':true, 'iconfont':true,  'extention':reseller - 0}">推广员
+   <div class="star">
+     <i ng-repeat="temp in temp_leavl.jf1 | orderBy : temp :'desc' track by $index">
+      <i ng-if="temp==1" class="icon iconfont  ion-android-star"></i>
+      <i ng-if="temp==0" class="icon iconfont icon-favor identified"></i>
+    </i>
+  </div>
+  </a>
+
+
+
+  <!-- <a href="#/attract" ng-class="{'identity-btn':true, 'icon':true, 'iconfont':true,  'extention':reseller - 0}">招商员
+   <div class="star">
+     <i ng-repeat="temp in temp_leavl.jf3 | orderBy : temp :'desc' track by $index">
+      <i ng-if="temp==1" class="icon iconfont  ion-android-star"></i>
+      <i ng-if="temp==0" class="icon iconfont icon-favor identified"></i>
+    </i>
+  </div>
+  </a> -->
+
+  <!-- <a href="#/serviceInfo"  ng-show="service > 0" ng-class="{'identity-btn':true, 'icon':true, 'iconfont':true,  'service':service > 0}">服务商
+    <div class="star">
+      <i ng-repeat="temp in temp_leavl.jf2 | orderBy : temp :'desc' track by $index">
+        <i ng-if="temp==1" class="icon iconfont  ion-android-star"></i>
+        <i ng-if="temp==0" class="icon iconfont icon-favor identified"></i>
+      </i>
+    </div>
+  </a> -->
+
+  <a href="#/agencyInfo" ng-show="resellshop > 0" ng-class="{'identity-btn':true, 'icon':true, 'iconfont':true,  'agent':resellshop}">代理商
+    <div class="star">
+      <i ng-repeat="temp in temp_leavl.jf4 | orderBy : temp :'desc' track by $index">
+        <i ng-if="temp==1" class="icon iconfont  ion-android-star"></i>
+        <i ng-if="temp==0" class="icon iconfont icon-favor identified"></i>
+      </i>
+    </div>
+  </a>
+</div>
+
+
+<!-- 信息条 -->
+<div class="list">
+   <a ng-href="#/oldsystem" class="item item-icon-left item-icon-right">
+    <i class="icon iconfont icon-pullright">
+    </i>
+    指点生活1.0数据
+    <i class="icon iconfont icon-right"></i>
+  </a>
+
+  <a href="" class="item item-icon-left item-icon-right">
+    <i class="icon iconfont icon-hot">
+    </i>
+    每日任务
+    <small>轻轻松松把钱赚！</small>
+    <i class="icon iconfont icon-right"></i>
+  </a>
+
+  <a ng-href="#/safeSetting" class="item item-icon-left item-icon-right">
+    <i class="icon iconfont icon-safe">
+    </i>
+    安全设置
+    <i class="icon iconfont icon-right"></i>
+  </a>
+  <a ng-href="#/finishYourInfo" class="item item-icon-left item-icon-right">
+    <i class="icon iconfont icon-profile">
+    </i>
+    实名认证
+    <i class="icon iconfont icon-right"></i>
+  </a>
+
+  <a ng-href="#/financing" class="item item-icon-left item-icon-right">
+    <i class="icon iconfont icon-moneybag">
+    </i>
+    我的财务
+    <i class="icon iconfont icon-right"></i>
+  </a>
+  <a ng-href="#/settingPage" class="item item-icon-left item-icon-right">
+    <i class="icon iconfont icon-settings">
+    </i>
+    更多设置
+    <i class="icon iconfont icon-right"></i>
+  </a>
+</div>
+
+
+</div>
+</ion-content>
+</ion-view>
+
+

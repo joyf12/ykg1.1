@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+
+    <link href="css/iconfont.css" rel="stylesheet">
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/public.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <!-- <script src="lib/oclazyload/dist/oclazyLoad.min.js"></script>
+    <script src="js/ui.router.requirePolyfill.js"></script> -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/routes.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/routes/tabs.route.js"></script>
+    
+    <script src="js/routes/tabs.home.js"></script>
+     <script src="js/controllers/home.controller.js"></script>
+
+    <script src="js/routes/chatsDetail.route.js"></script>
+    <script src="js/routes/tabs.account.route.js"></script>
+
+    <script src="js/routes/login.route.js"></script>
+    <script src="js/controllers/loginController.js"></script>
+
+    <script src="js/controllers/signupController.js"></script>
+    <script src="js/routes/signupRoute.js"></script>
+
+    <script src="js/controllers/forgetps.controller.js"></script>
+    <script src="js/routes/forgetps.route.js"></script>
+
+    <script src="js/controllers/shop.controller.js"></script>
+    <script src="js/routes/tabs.shop.route.js"></script>
+
+    <script src="js/controllers/sidemenu.controller.js"></script>
+    <script src="js/routes/sidemenu.route.js"></script>
+
+    <script src="js/controllers/commendqr.controller.js"></script>
+    <script src="js/routes/commendqr.route.js"></script>
+
+    <script src="js/controllers/store.controller.js"></script>
+    <script src="js/routes/store.route.js"></script>
+
+    <script src="js/controllers/showcase.controller.js"></script>
+    <script src="js/routes/showcase.route.js"></script>
+
+  <script src="js/controllers/uploadvoucher.controller.js"></script>
+  <script src="js/routes/uploadvoucher.route.js"></script>
+
+  <script src="js/controllers/myorder.controller.js"></script>
+  <script src="js/routes/myorder.route.js"></script>
+
+  <script src="js/controllers/withdraw.controller.js"></script>
+  <script src="js/routes/withdraw.route.js"></script>
+
+  <script src="js/controllers/advance.controller.js"></script>
+  <script src="js/routes/advance.route.js"></script>
+
+  <script src="js/controllers/realname.controller.js"></script>
+  <script src="js/routes/realname.route.js"></script>
+
+  <script src="js/controllers/alipay.controller.js"></script>
+  <script src="js/routes/alipay.route.js"></script>
+
+  <script src="js/controllers/bankaccount.controller.js"></script>
+  <script src="js/routes/bankaccount.route.js"></script>
+
+  <script src="js/controllers/private.controller.js"></script>
+  <script src="js/routes/private.route.js"></script>
+   
+  </head>
+  <body ng-app="ykg">
+    <!--
+      The nav bar that will be updated as we navigate between views.
+    -->
+    
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+
+    <!-- <ion-nav-bar>
+        <ion-nav-back-button class="button-clear show">
+            <i class="icon iconfont icon-back"></i>
+        </ion-nav-back-button>
+    </ion-nav-bar > -->
+
+   <!--  <ion-nav-bar class="bar-stable ion-ios-arrow-back">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar> -->
+    <!--
+      The views will be rendered in the <ion-nav-view> directive below
+      Templates are in the /templates folder (but you could also
+      have templates inline in this html file if you'd like).
+    -->
+    <ion-nav-view></ion-nav-view>
+  </body>
+</html>

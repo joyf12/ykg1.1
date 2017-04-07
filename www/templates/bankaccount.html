@@ -1,0 +1,81 @@
+<ion-view id="ring" view-title="银行卡号" cache-view="false" class="yourInfo">
+
+  <ion-content scroll="true" class="has-header">
+    <ion-list>
+      <!-- 如果用户信息没有填了，显示这个 -->
+      <form name="debitcard" ng-if="!activeState.filled">
+       <!--  <label for="" class="item item-input">
+          <span class="input-label">开户人姓名</span>
+          <input type="text" required="required" placeholder="开户时所填的真实姓名" name="name" ng-model="bankInfo.name">
+        </label> -->
+
+        <label for="" class="item item-input">
+          <span class="input-label">开户行</span>
+          <input type="text" required="required" placeholder="请输入银行名称(确认后不可修改)" name="whichBank" ng-model="bankInfo.whichBank">
+        </label>
+
+        <label for="" class="item item-input">
+          <span class="input-label">开户支行</span>
+          <input type="text" required="required" placeholder="如北京市工商银行王府井支行" name="whereApply" ng-model="bankInfo.whereApply">
+        </label>
+
+        <label for="" class="item item-input">
+          <span class="input-label">银行卡号</span>
+          <input type="text" required="required" placeholder="请输入银行卡号(确认后不可修改)" name="cardNumber" ng-model="bankInfo.cardNumber" ng-blur="checkCardNumber()">
+        </label>
+
+
+
+        <label for="" class="item item-input">
+          <span class="input-label">重复卡号</span>
+          <input type="text" required="required" placeholder="请重复输入你的银行卡号" name="repeatNumber" ng-model="bankInfo.repeatCardNumber" ng-blur="checkCardNumber()">
+        </label>
+
+        <label for="" class="item item-input debitCard">
+          <span class="input-label">上传银行卡照</span>
+          <i class="icon iconfont icon-add" on-touch="getPic()"></i>
+          <img src="img/avatar.jpg" alt="">
+
+        </label>
+
+        <span class="note padding" ng-if="inSame">卡号两次不一致，请认真核对后再提交</span>
+        <p class="notice" ng-if="bankInfo.name && bankInfo.whereApply && bankInfo.whichBank && bankInfo.repeatCardNumber">
+          注意：开启行名称，银行卡号和开户人姓名必须一致，否则会导致提现失败，为了安全考虑，仅限首次修改，如需再次修改，请联系智点生活客服</p>
+        <div class="padding">
+          <button ng-class="{'button':true, 'button-block':true, 'button-assertive':!activeState.buttonState, 'button-balanced':activeState.buttonState}"
+                  ng-disabled="debitcard.name.$invalid || debitcard.whereApply.$invalid || debitcard.whichBank.$invalid || debitcard.cardNumber.$invalid || debitcard.repeatNumber.$invalid || activeState.buttonWaite"
+                  ng-click="submit()" >{{activeState.buttonText}}
+          </button>
+        </div>
+      </form>
+
+      <!-- 如果用户信息已经填了，显示这个 -->
+      <form name="debitcard" ng-if="activeState.filled">
+        <label for="" class="item item-input">
+          <span class="input-label">开户行</span>
+          <input type="text" required="required" name="whichBank" placeholder="{{userInfo.banks}}" readonly="readonly">
+        </label>
+
+        <label for="" class="item item-input">
+          <span class="input-label">开户支行</span>
+          <input type="text" required="required" placeholder="{{userInfo.bankaccount}}" name="whereApply" readonly="readonly">
+        </label>
+        
+        <label for="" class="item item-input">
+          <span class="input-label">银行卡号</span>
+          <input type="text" required="required" placeholder="{{userInfo.bankcardnumber}}" name="cardNumber" readonly="readonly">
+        </label>
+
+        <label for="" class="item item-input debitCard">
+          <span class="input-label">银行卡照</span>
+          <img ng-src="{{userInfo.bank ||img/avatar.jpg}}" alt="">
+
+        </label>
+       
+      </form>
+    </ion-list>
+  </ion-content>
+
+</ion-view>
+
+

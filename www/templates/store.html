@@ -1,0 +1,38 @@
+<ion-view view-title="商铺" id="store" hide-nav-bar="false">
+	<ion-content class="" has-bounds="true">
+		<div class="storead">
+			<ion-slides  options="options" slider="data.slider" auto-play="true">
+			  <ion-slide-page >
+			    <a href=""><img ng-src="img/ben.png" alt="" class="full-image" style="height:153px"></a>
+			  </ion-slide-page>
+			</ion-slides>
+		</div>
+		<ion-list>
+      <ion-item class="item-body">
+        <p class="tool-bar">
+          <a href="javascript:void(0)" class="subdued ion-ios-location" ng-click="navigate()">导航</a>
+          <a href="tel:{{shopInfo.phone}}"" class="subdued ion-chatbox-working" >商聊</a>
+          <a ng-href="#/showcase" class="subdued ion-ios-cart">店铺</a>
+        </p>
+        <p>店铺名称:<br/>
+          <span>{{shopInfo.name}}
+          </span>
+        </p>
+        <p>店家介绍:<br/>
+          <span>{{shopInfo.about}}
+          </span>
+        </p>
+
+        <p>店铺地址:<br/>
+          <span>{{shopInfo.address}}
+          </span>
+        </p>
+      </ion-item>
+      <a class="item item-avatar" ng-repeat="x in shopInfo.news" href="#/newsContent?id={{x.id}}">
+        <img ng-src="{{x.icon}}" alt="">
+        <h3>商家新闻</h3>
+        <p>{{x.title}}</p>
+      </a>
+    </ion-list>
+	</ion-content>
+</ion-view>

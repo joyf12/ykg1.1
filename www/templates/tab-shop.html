@@ -1,0 +1,98 @@
+<ion-view view-title="商家" id="shop" hide-nav-bar="false" class="#shop" >
+  <ion-content  has-bouncing="true">
+    <ion-slides  options="options" slider="data.slider" auto-play="true">
+      <ion-slide-page style="background-color:blue ">
+        <a href=""><img src="img/ben.png" alt=""></a>
+      </ion-slide-page>
+      <ion-slide-page style="background-color:yellow ">
+        <a href=""><img src="img/ben.png" alt=""></a>
+      </ion-slide-page>
+      <ion-slide-page style="background-color: pink">
+        <a href=""><img src="img/ben.png" alt=""></a>
+      </ion-slide-page>
+    </ion-slides>
+
+    <!-- <div class="button-bar">
+      <button ng-class="{'button':true, 'button-assertive':true, 'button-light':true, 'button-active':true}">个人版</button>
+      <button ng-class="{'button':true, 'button-assertive':false, 'button-light':true}">商家版</button>
+    </div> -->
+
+    <!-- 头条 -->
+   <!--  <div class="news swiper-container hotnews track by $index" style="height: 80px; overflow: hidden;">
+      <div class="list swiper-wrapper">
+        <a class="item item-thumbnail-left swiper-slide" ng-href="#/news" >
+          <img ng-src="img/ben.png">
+          <div class="text">
+            <p><i class="icon badge badge-light">头条</i>55456</p>
+            <p><i class="icon badge badge-light">头条</i>54564654656655456</p>
+          </div>
+        </a>
+      </div>
+    </div> -->
+
+   <!--  <div class="commend padding">
+      <h5 class="text-center">商家推荐</h5>
+      <a href="#">
+      <img src="img/ben.png" alt="">
+      </a>
+    </div> -->
+
+    <!--商家分类 -->
+   <ion-slide-box on-slide-changed="slideHasChanged($index)">
+      <ion-slide>
+        <div class="goods-sort">
+          <a class="good-circle" ng-repeat="item in res | searchFit:0:10">
+            <i ng-class="item.icon" ng-click="getInfoByClass({{item.id}})">
+              <img ng-src={{item.itempic}} alt="">
+            </i>
+            <sapn ng-bind="item.itemclass"></sapn>
+        </a>
+
+        </div>
+      </ion-slide>
+
+      <ion-slide>
+        <div class="goods-sort">
+          <a class="good-circle" ng-repeat="item in res | searchFit:10:13">
+            <i ng-class="item.icon" ng-click="getInfoByClass({{item.id}})"></i>
+            <sapn ng-bind="item.itemclass"></sapn>
+          </a>
+        </div>
+      </ion-slide>
+    </ion-slide-box>
+     <!--/商家分类 -->
+
+    <!-- 附近商家 -->
+    <div class="filter-lists">
+      <div ng-repeat="item in nearshops track by item.id">
+        <a ng-href="#/shopPage/{{item.id}}" class="list-card">
+          <div class="list-photo">
+            <span class="shop-label">推荐商家</span>
+            <img ng-src="{{item.shopdoor}}" alt="">
+          </div>
+
+          <div class="list-text">
+        <span class="list-label">
+          推荐
+        </span>
+
+            <h4>{{item.shopname}}</h4>
+            <address>地址：<span>{{item.address}}</span></address>
+            <p><span>分类：</span>{{item.class}}</p>
+
+            <p class="shop-ad"><span>广告：</span>{{item.shopad}}</p>
+            <div class="grade">
+          <span ng-repeat="temp in item.jf track by $index">
+            <i ng-if="temp==1" class="icon iconfont icon-favor identified"></i>
+            <i ng-if="temp==0" class="icon iconfont icon-favor"></i>
+          </span>
+              <span class="shop-score">{{item.shopscore}}分</span>
+              <i class="icon iconfont icon-location shop-location">{{item.distance}}km</i>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

@@ -1,0 +1,87 @@
+body,.button, input{
+	font-size:12px;
+}
+
+a,ul,li,ol,dl,dt,dd{
+	text-decoration: none;
+	padding:0;
+	color:#333;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+	color: #999; 
+	font-size:12px;
+}
+
+.bar{
+	background-color:#979797;
+	color:#fff;
+}
+
+.bar.bar-stable {
+	background-color: #e59349;
+}
+
+.bar  .title {
+	font-size:14px;
+}
+
+.nav-bar-block .bar .title{
+	color:#fff;
+}
+
+.menu{
+  background-color: #333;
+  /*top:44px;*/
+}
+
+.menu .list {
+  padding-top: 44px;
+}
+
+.menu .list .item {
+  background-color: #333;
+  color:#fff;
+  font-size:12px;
+  border-bottom:1px solid #393939;
+  border-top:1px solid #393939;
+}
+
+.list .item{
+  font-size:12px;
+}
+
+.list .item span, .list .item p{
+  font-size:12px;
+}
+
+.list .item i {
+  font-size:20px;
+  color:#999;
+}
+
+.action-sheet-wrapper .action-sheet-group button.button{
+  font-size:14px;
+}
+.action-sheet-wrapper .action-sheet-group .action-sheet-title{
+  font-size:14px;
+  color:#333;
+}
+
+.action-sheet-wrapper .action-sheet-options button.button:nth-of-type(n){
+  color:#007aff;
+}
+
+.action-sheet-wrapper .action-sheet-cancel button.button:nth-of-type(1){
+  color:#333;
+}
+
+.list .item-input .input-label {
+  width:auto;
+}
+
+.notice {
+  color:red;
+}
+
+

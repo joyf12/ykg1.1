@@ -1,0 +1,30 @@
+<ion-view id="uploadVoucher" view-title="上传凭证">
+  <ion-content class="has-header">
+    <ion-list>
+      <label class="item item-input"  >
+        <span class="input-label">输入订单号</span>
+        <input type="text" placeholder="{{statesign.orderNo}}"  ng-model="statesign.orderNo" class="manual" ng-change="edit()" >
+      </label>
+      <p style="color:#ccc; padding: 0 15px;line-height: 30px;">多个订单号请用 , 隔开，如：10622,10623</p>
+    </ion-list>
+    <div class="voucher">
+      <div class="pageBox">
+        <div ng-class="{'VoucherPic':true,'showModel':statesign.model[$index] == $index} " ng-repeat="item in statesign.selectPicArr track by $index" ng-click="operate($index)">
+          <img ng-src="{{item}}">
+          <i ng-if="statesign.model[$index] == $index" class="badage badage-assertive icon iconfont icon-close" ng-click="delete($index)"></i>
+      </div>
+        
+        <label for="" class="upBtn" ng-click="selectPic()">
+          <button class="button button-icon button-clear icon iconfont icon-add"></button>
+        </label>
+      </div>
+    </div>
+    <div class="padding">
+      <button ng-class="{'button':true, 'button-assertive':!statesign.buttonState, 'button-balanced':statesign.buttonState, 'button-block':true}"
+              ng-click="uploadVoucher()" ng-disabled="statesign.buttonWaite">{{statesign.buttonText}}
+      </button>
+    </div>
+
+    <div id="c"></div>
+  </ion-content>
+</ion-view>

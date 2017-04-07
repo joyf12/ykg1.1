@@ -1,0 +1,51 @@
+<ion-view view-title="用户注册" id="signup" >
+	<ion-content  has-bounds="true">
+		<ion-list>
+    <form name="signupForm">
+			<label class="item item-input ion-icon-left">
+				<i class="ion-person"></i>
+    			<input type="text" placeholder="用户名" required="required" ng-model="bindData.nickname">
+  			</label>
+
+  			<label class="item item-input ion-icon-left">
+  				<i class="ion-android-phone-portrait"></i>
+    			<input type="number" placeholder="手机号码" required="required" ng-model="bindData.phone" ng-change="checkphone()">
+  			</label>
+
+  			<div class="item item-input ion-icon-left">
+  				<i class="ion-key"></i>
+    			<input type="text" placeholder="验证码" required="required" ng-model="bindData.code">
+    			<button ng-class="{'code':true, 'button':true, 'button-assertive':!bindData.runing, 'button-light':bindData.runing}" ng-click="getCode()" >{{bindData.CodeInterval}}{{bindData.verificationBtn}}</button>
+  			</div>
+
+  			<label class="item item-input ion-icon-left">
+  				<i class="ion-locked"></i>
+    			<input type="password" placeholder="密码" required="required" ng-model="bindData.password" ng-change="checkps()">
+  			</label>
+
+
+  			<label class="item item-input ion-icon-left">
+  				<i class="ion-locked"></i>
+    			<input type="password" placeholder="确认密码" required="required" ng-model="bindData.password2" ng-change="checkps2()">
+  			</label>
+
+  			<label class="item item-input ion-icon-left">
+  				<i class="ion-android-pin"></i>
+    			<input type="text" placeholder="地址" required="required">
+  			</label>
+
+        <label class="item item-input ion-icon-left">
+          <i class="ion-person"></i>
+          <input type="number" placeholder="推荐人手机号码" required="required" ng-model="bindData.refer">
+        </label>
+		</ion-list>
+		<div class="padding">
+			<button class="button button-assertive button-block" ng-disabled="signupForm.$invalid || phoneErr || psErr || psErr2 || referErr" ng-click="signup()">注册</button>
+		</div>
+    </form>
+    <div class="container">
+      
+    </div>
+
+	</ion-content>
+</ion-view>
