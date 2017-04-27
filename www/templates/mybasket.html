@@ -1,0 +1,22 @@
+<ion-view id="mybasket" view-title="购物车" cache-view="false">
+
+  <ion-content scroll= "true" class="has-header">
+   <div class="list">
+
+      <ion-item class="item item-thumbnail-left"  ng-repeat="data in datas track by $index" ng-click="selectGoods($index)">
+        <img ng-src={{data.producepic}}>
+        <h2 class="shopname">{{}}</h2>
+        <h2 class="goodsname">{{data.producename}}</h2>
+        <p class="price">{{data.price}}</p>
+        <p class="quantity">x1</p>
+        <i class="choose icon iconfont icon-check" ng-if="$index == index[$index]"></i>
+      </ion-item>
+   </div>
+
+  <div class="button-bar padding">
+    <button class="button button-dark" ng-click="deleteOrder()">删除</button>
+    <button class="button button-assertive" ng-click="pay()">购买</button>
+  </div>
+  </ion-content>
+
+</ion-view>

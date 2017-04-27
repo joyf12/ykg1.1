@@ -1,4 +1,4 @@
-<ion-view id="ring" view-title="银行卡号" cache-view="false" class="yourInfo">
+<ion-view id="bankaccount" view-title="银行卡号" cache-view="false" class="yourInfo">
 
   <ion-content scroll="true" class="has-header">
     <ion-list>
@@ -8,6 +8,11 @@
           <span class="input-label">开户人姓名</span>
           <input type="text" required="required" placeholder="开户时所填的真实姓名" name="name" ng-model="bankInfo.name">
         </label> -->
+
+        <label for="" class="item item-input">
+          <span class="input-label">开户人姓名</span>
+          <input type="text" required="required" placeholder="请输入银行名称(确认后不可修改)" name="whichBank" ng-model="bankInfo.bankusername">
+        </label>
 
         <label for="" class="item item-input">
           <span class="input-label">开户行</span>
@@ -25,7 +30,6 @@
         </label>
 
 
-
         <label for="" class="item item-input">
           <span class="input-label">重复卡号</span>
           <input type="text" required="required" placeholder="请重复输入你的银行卡号" name="repeatNumber" ng-model="bankInfo.repeatCardNumber" ng-blur="checkCardNumber()">
@@ -34,7 +38,7 @@
         <label for="" class="item item-input debitCard">
           <span class="input-label">上传银行卡照</span>
           <i class="icon iconfont icon-add" on-touch="getPic()"></i>
-          <img src="img/avatar.jpg" alt="">
+          <img src="img/ben.png" alt="">
 
         </label>
 
@@ -53,22 +57,22 @@
       <form name="debitcard" ng-if="activeState.filled">
         <label for="" class="item item-input">
           <span class="input-label">开户行</span>
-          <input type="text" required="required" name="whichBank" placeholder="{{userInfo.banks}}" readonly="readonly">
+          <input type="text" required="required" name="whichBank" placeholder="{{account.info.bankdeposit}}" readonly="readonly">
         </label>
 
         <label for="" class="item item-input">
           <span class="input-label">开户支行</span>
-          <input type="text" required="required" placeholder="{{userInfo.bankaccount}}" name="whereApply" readonly="readonly">
+          <input type="text" required="required" placeholder="{{account.info.bankaccount}}" name="whereApply" readonly="readonly">
         </label>
         
         <label for="" class="item item-input">
           <span class="input-label">银行卡号</span>
-          <input type="text" required="required" placeholder="{{userInfo.bankcardnumber}}" name="cardNumber" readonly="readonly">
+          <input type="text" required="required" placeholder="{{account.info.bankcardid}}" name="cardNumber" readonly="readonly">
         </label>
 
         <label for="" class="item item-input debitCard">
           <span class="input-label">银行卡照</span>
-          <img ng-src="{{userInfo.bank ||img/avatar.jpg}}" alt="">
+          <img ng-src="{{account.picture.bankpic ||img/ben.png}}" alt="">
 
         </label>
        

@@ -1,5 +1,5 @@
 <ion-view view-title="用户注册" id="signup" >
-	<ion-content  has-bounds="true">
+	<ion-content  ion-content class="scroll-content" overflow-scroll="false" has-bouncing="true">
 		<ion-list>
     <form name="signupForm">
 			<label class="item item-input ion-icon-left">
@@ -29,10 +29,31 @@
     			<input type="password" placeholder="确认密码" required="required" ng-model="bindData.password2" ng-change="checkps2()">
   			</label>
 
-  			<label class="item item-input ion-icon-left">
-  				<i class="ion-android-pin"></i>
-    			<input type="text" placeholder="地址" required="required">
-  			</label>
+  			<!-- <label class="item item-input ion-icon-left" style="padding:0;margin:0;"> -->
+  				<!-- <i class="ion-android-pin"></i> -->
+    			<!-- <input type="text" placeholder="地址" required="required"> -->
+         
+  			<!-- </label> -->
+        <!-- <ionic-city-picker style="width:100%" options='vm.CityPickData2' class="address"></ionic-city-picker> -->
+        <ionic-city-picker options='vm.CityPickData' ></ionic-city-picker>
+
+       <!--  <ionic-city-picker options='vm.CityPickData1'></ionic-city-picker>
+        <ionic-city-picker options='vm.CityPickData2'></ionic-city-picker>
+        <ionic-city-picker options='vm.CityPickData3'></ionic-city-picker>
+        <ionic-city-picker options='vm.CityPickData4'></ionic-city-picker>
+        <div class="button button-positive button-block" ng-click="vm.change()">
+          修改城市
+        </div>
+        <div class="button button-positive button-block" ng-click="vm.sync()">
+          同步{{vm.CityPickData2.areaData}}
+        </div> -->
+
+
+
+        <label class="item item-input ion-icon-left">
+          <i class="icon iconfont icon-locationfill"></i>
+          <input type="number" placeholder="街道门牌" required="required" ng-model="bindData.refer">
+        </label>
 
         <label class="item item-input ion-icon-left">
           <i class="ion-person"></i>

@@ -19,12 +19,40 @@ angular.module('route', [
 	'realname.route',
 	'alipay.route',
 	'bankaccount.route',
-	'private.route'
+	'private.route',
+	'newslist.route',
+	'newscontent.route',
+	'backbean.route',
+	'popularize.route',
+	'moresetting.route',
+	'mybasket.route',
+	'pay.route',
+	'guidepage.route',
+    'storeaccount.route',
+    'storeorder.route',
+    'transfer.route',
+    'uploadlog.route',
+    'wechat.route',
+    'safesetting.route',
+    'changeloginps.route',
+    'changeWithdraw.route',
+    'setWithdrawPS.route',
+    'goodsManager.route',
+    'applyShop.route',
+    'record.route',
 	])
 .config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
-
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/home');
-
+  
+   //如果不是第一次登陆，直接跳转
+    if(localStorage["isFirst"]){
+      if(localStorage.userinfo){
+        $urlRouterProvider.otherwise('/tab/home');
+      }else{
+        $urlRouterProvider.otherwise('/login');
+      }
+      
+    }
+    else{
+      $urlRouterProvider.otherwise('/guidepage');
+    }
 });

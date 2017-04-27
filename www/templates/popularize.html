@@ -1,0 +1,16 @@
+<ion-view id="popularize" view-title="" cache-view="false">
+  
+  <ion-content scroll="true" class="has-header">
+    <ion-list class="list padding">
+      <ion-item class="item item-thumbnail-left" style="" ng-repeat="data in res">
+        <img ng-src={{data.pic}}>
+        <h2>{{data.username}}</h2>
+        <p>{{data.phone}}</p>
+        <p>爱心数：{{data.love}}</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+</ion-view>
+
+

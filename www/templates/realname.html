@@ -1,24 +1,71 @@
-
-<ion-view id="ring" view-title="实名认证" cache-view="false">
-  
+<ion-view id="realname" view-title="个人信息认证" cache-view="false">
   <ion-content scroll="true" class="has-header">
-    <ion-list>
-      <a href="#/pravite" class="item item-icon-right">
-        <i class="icon iconfont icon-right"></i>
-          真实姓名
-      </a>
+    <!-- 没有认证 -->
+    <form name="myForm" ng-show="!userVer.filled">
+      <ion-list>
+        <label class="item item-input">
+          <span class="label-input">真实姓名：</span>
+          <input type="text"  ng-blur="chinese()" ng-model="userVer.chinese" >
+          
+        </label>
+        <span class="note" ng-show="chineseErr">不是有效的中文名！</span>
 
-      <a href="#/bankaccount" class="item item-icon-right">
-        <i class="icon iconfont icon-right"></i>
-          银行帐户
-      </a>
+        <label class="item item-input" >
+          <span class="label-input">身份证号：</span>
+        <input type="text"  ng-model="userVer.identite" ng-blur="identite()" >
+         
+        </label>
+         <span ng-show="identiteErr" class="note">身份证格式不正确，请核对后重新输入！</span>
 
-       <a href="#/alipay" class="item item-icon-right">
-        <i class="icon iconfont icon-right"></i>
-          支付宝帐号
-      </a>
-    </ion-list>
-  </ion-content>
+        <label class="item item-input item-icon-left identityFront img" ng-click="uploadAvatar(1)"  >
+          <span class="label-input">身份证正面：</span>
+          <i class="icon iconfont icon-add"></i>
+          <img ng-src="{{userInfo.zheng ||'img/ben.png'}}" alt="" name="file" id="front"/>
+        </label>
+
+        <label class="item item-input item-icon-left identityFront img" ng-click="uploadAvatar(2)"  >
+          <span class="label-input">身份证背面：</span>
+          <i class="icon iconfont icon-add" ></i>
+          <img ng-src="{{userInfo.fang ||'img/ben.png'}}" alt="" name="file" id="back"/>
+        </label>
+        <p class="notice">注意：请正确认真填写以上信息以避免收款失败</p>
+      </ion-list>
+   
+        <div class="padding">
+           <button ng-click="saveAvatar()" ng-class="{'button':true, 'button-assertive':userVer.buttonState, 'button-balanced':!userVer.buttonState, 'button-block':true}" ng-disabled="chineseErr || identiteErr || userVer.buttonWaite">{{userVer.buttonText}}</button>
+        </div>
+    </form>
+
+    <!-- 已经认证了 -->
+    <form name="myForm" ng-show="userVer.filled">
+      <ion-list>
+        <label class="item item-input">
+          <span class="label-input">真实姓名：</span>
+          <input type="text"   ng-model="userVer.chinese" placeholder="{{account.info.truename}}" readonly="readonly">
+        </label>
+
+        <label class="item item-input" >
+          <span class="label-input">身份证号：</span>
+        <input type="text"  ng-model="userVer.identite"  placeholder="{{account.info.idnumber}}" readonly="readonly">
+         
+        </label>
+        
+
+        <label class="item item-input item-icon-left identityFront img" >
+          <span class="label-input">身份证正面：</span>
+       
+          <img ng-src="{{account.picture.idcard ||'img/avatar.jpg'}}" alt="" name="file" id="front"/>
+        </label>
+
+        <label class="item item-input item-icon-left identityFront img">
+          <span class="label-input">身份证背面：</span>
+      
+          <img ng-src="{{account.picture.unidcard ||'img/avatar.jpg'}}" alt="" name="file" id="back"/>
+        </label>
+       
+      </ion-list>
+    </form>
+</ion-content>
 
 </ion-view>
 

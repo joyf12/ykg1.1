@@ -7,9 +7,10 @@
     			<input type="number" placeholder="手机号码" required="required" ng-model="bindData.phone" ng-change="checkphone()">
   			</label>
 
-  			<div class="item item-input ion-icon-left">
+  			<div class="item item-input ion-icon-left verificationCode">
   				<i class="ion-key"></i>
-    			<input type="text" placeholder="验证码" required="required" ng-model="bindData.code">
+          <!-- <span class="input-label">短信验证</span> -->
+    			<input type="text" placeholder="短信验证" required="required" ng-model="bindData.code">
     			<button ng-class="{'code':true, 'button':true, 'button-assertive':!bindData.runing, 'button-light':bindData.runing}" ng-click="getCode()" >{{bindData.CodeInterval}}{{bindData.verificationBtn}}</button>
   			</div>
 

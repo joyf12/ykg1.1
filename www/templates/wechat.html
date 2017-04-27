@@ -1,0 +1,20 @@
+<ion-view id="wechat" view-title="微信账户" cache-view="false">
+  
+  <ion-content scroll="true" class="has-header">
+    <ion-list>
+      <label for="" class="item item-input item-icon-right">
+        <span class="input-label">微信号：</span>
+        <input type="text" ng-model="account.wechat" placeholder="{{userAccount.info.weixingid}}" ng-readonly="account.filled">
+      </label>  
+    </ion-list>
+    <p class="notice padding" ng-if="!account.filled">注意：微信帐户必须是以你本人信息开通的帐号</p>
+    <p class="notice padding" ng-if="account.filled">微信账户已认证</p>
+    <div class="padding" ng-if="!account.filled">
+       <button ng-class="{'button':true, 'button-assertive':account.buttonState,'button-balanced':!account.buttonState, 'button-block':true}" ng-click="wechat()">{{account.buttonText}}</button>
+    </div>
+   
+  </ion-content>
+
+</ion-view>
+
+

@@ -1,0 +1,60 @@
+<ion-view id="applyShop" view-title="申请成为商家" cache-view="false">
+  <ion-content class="scroll-content" scroll="true">
+    <div class="list">
+      <form name="applyMerchant">
+        <label for="" class="item item-input">
+          <span class="input-label">商家名</span>
+          <input type="text" placeholder="请输入你的店铺名或公司名" ng-model="shopInfo.shopName" required="required">
+        </label>
+
+        <label for="" class="item item-input">
+          <span class="input-label">姓名</span>
+          <input type="text" placeholder="请输入你的真实姓名"  ng-model="shopInfo.shopkeeper" required="required">
+        </label>
+
+        <label for="" class="item item-input">
+          <span class="input-label">电话</span>
+          <input type="text" placeholder="请输入你的11位数手机号"  ng-model="shopInfo.shopPhone" required="required">
+        </label>
+
+
+      <ionic-city-picker options='vm.CityPickData2'></ionic-city-picker>
+
+      <label for="" class="item item-input">
+        <span class="input-label">店铺详细地址</span>
+        <input type="text" placeholder="店铺门牌号或大厦名"  ng-model="shopInfo.shopAddress" required="required">
+      </label>
+
+      <label class="item item-input item-select sort">
+       <div class="input-label">
+         行业分类
+       </div>
+       <select  ng-model="item" ng-options="item as item.itemclass for item in shopclass track by item.id" ng-change="selected2(item.id)">
+       </select>
+     </label>
+     <label for="" class="item item-input shopPermission">
+      <span class="input-label">营业执照</span> 
+       <img ng-if="picBox > 0" ng-src="{{picArr[0]}}" />
+      <button class="upload button button-light icon-button icon iconfont icon-add" on-touch="uploadPic(1)"></button>
+    </label>
+    <label for="" class="item item-input shopPic">
+      <span class="input-label">商家门头照</span>
+      <img ng-if="picBox > 1" ng-src="{{picArr[1]}}" />
+      <button class="upload button button-light icon-button icon iconfont icon-add" on-touch="uploadPic(2)"></button>
+     
+    </label>
+    <div class="agreement">
+      <ion-checkbox ng-model="filter.red" class="agreement">我已经阅读并同意
+
+      </ion-checkbox>
+      <a ng-href="#/agreementContent/:seller" class="">商户注册服务协议</a>
+    </div>
+    <div class="padding">
+    <button ng-class="{button:'true', 'button-assertive':!shopInfo.buttonState,'button-balanced':shopInfo.buttonState, 'button-block':true}" ng-click="uploadVoucher()" ng-disabled=" applyMerchant.$invalid || shopInfo.buttonWaite">{{shopInfo.buttonText}}</button>
+   </div>
+ </form>
+</div>
+</ion-content>
+</ion-view>
+
+

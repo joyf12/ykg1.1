@@ -3,28 +3,27 @@
   <ion-content scroll="true" class="has-header">
     <ion-list>
         <ion-item>
-          真实姓名:{{data.truename}}
+          真实姓名:{{useraccount.bankusername}}
         </ion-item>
         <ion-item>
-          开户行：{{data.bank}}
+          开户行：{{useraccount.bankdeposit}}
         </ion-item>
         <ion-item>
-          银行卡号：{{data.bankcardnumber}}
+          银行卡号：{{useraccount.bankcardid}}
 
         </ion-item>
         <ion-item>
-          手机号码：{{data.phone}}
+          手机号码：{{useraccount.phone}}
         </ion-item>
-        <ion-item class="item-icon-right switchId">
+        
+      <!--   <ion-item class="item-icon-right switchId">
         <i class="icon ion-chevron-down" on-touch="typeToggle()">{{typeMenu.displayType}}</i>
           身份选择：
           
           <ul class="searchTag " ng-if="typeMenu.active">
             <li ng-click="getUserType('商家')" >商家</li>
-            <li ng-click="getUserType('推广员')" >推广员</li>
-            <li ng-click="getUserType('代理商')" >代理商</li>
           </ul>
-        </ion-item>
+        </ion-item> -->
         <label class="item item-input">
           <span class="input-label" placeholder="0.00">提现金额：</span>
           <input type="number" ng-model="userMoney.cash">
@@ -35,7 +34,7 @@
           <input type="password" placeholder="提现密码为实名认证时所填的安全码" ng-model="userMoney.code">
         </label>
         <div class="noticeBox">
-          <p>你的可提现金额：￥<span class="sum">{{userMoney.sum}}</span></p>
+          <p>你的可提现金额：￥<span class="sum">{{unfreeze}}</span></p>
           <p>提示：支付宝提现请确认支付宝帐号跟您的真实姓名一致，否则将提现失败</p>
         </div>
         <div class="padding">

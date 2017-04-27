@@ -3,25 +3,24 @@
   <ion-content scroll="true" class="has-header">
     <ion-list>
         <ion-item>
-          真实姓名:{{data.truename}}
+          真实姓名：{{account.info.bankusername}}
         </ion-item>
         <ion-item>
-          开户行：{{data.bank}}
+          开户行：{{account.info.bankdeposit}}
         </ion-item>
         <ion-item>
-          银行卡号：{{data.bankcardnumber}}
+          银行卡号：{{account.info.bankcardid}}
 
         </ion-item>
         <ion-item>
-          手机号码：{{data.phone}}
+          手机号码：{{account.info.phone}}
         </ion-item>
         <ion-item class="item-icon-right switchId">
-        <i class="icon ion-chevron-down" on-touch="typeToggle()">{{typeMenu.displayType}}</i>
+        <i class="icon ion-chevron-down" ng-click="typeToggle()">{{typeMenu.displayType}}</i>
           身份选择：
           
-          <ul class="searchTag " ng-if="typeMenu.active">
+          <ul class="selectBar " ng-if="typeMenu.active">
             <li ng-click="getUserType('商家')" >商家</li>
-            <li ng-click="getUserType('推广员')" >推广员</li>
             <li ng-click="getUserType('代理商')" >代理商</li>
           </ul>
         </ion-item>
@@ -39,7 +38,7 @@
           <p>提示：支付宝提现请确认支付宝帐号跟您的真实姓名一致，否则将提现失败</p>
         </div>
         <div class="padding">
-          <button ng-class="{'button':true, 'button-assertive':!typeMenu.buttonState, 'button-block':true,'button-balanced':typeMenu.buttonState,}" ng-click="withdrawApply()" ng-disabled="typeMenu.buttonWaite || userMoney.code == null">{{typeMenu.buttonText}}</button>
+          <button ng-class="{'button':true, 'button-assertive':!typeMenu.buttonState, 'button-block':true,'button-balanced':typeMenu.buttonState,}" ng-click="Apply()" ng-disabled="typeMenu.buttonWaite || userMoney.code == null">{{typeMenu.buttonText}}</button>
         </div>
        
         

@@ -7,6 +7,7 @@ angular.module('bankaccount.controller', ['ykg.services', 'global'])
  'uploadPicFty',
  '$ionicHistory',
  '$timeout',
+ 'Storage',
  function ($scope, 
   postDataFty,
   getCurrentUserFty, 
@@ -14,14 +15,16 @@ angular.module('bankaccount.controller', ['ykg.services', 'global'])
   Message, 
   uploadPicFty,
   $ionicHistory,
-  $timeout) {
+  $timeout,
+  Storage) {
 
   $scope.bankInfo = {
     // name: null,
     whichBank: null,
     whereApply: null,
     cardNumber: null,
-    repeatCardNumber: null
+    repeatCardNumber: null,
+    bankusername:null
 
   }
 
@@ -38,60 +41,42 @@ angular.module('bankaccount.controller', ['ykg.services', 'global'])
 
        //状态改变变量
       $scope.userInfo = getCurrentUserFty.getCurrentUser();
-
+      $scope.account = Storage.get('account');
+      // alert(angular.toJson($scope.account))
       $scope.activeState = {
         buttonState: false,
         buttonText: '提交',
         buttonWaite: false,
-        filled:$scope.userInfo.bankcardnumber != '' && $scope.userInfo.bankcardnumber != 'null' && $scope.userInfo.bankaccount != '' && $scope.userInfo.bankphoto != '' && $scope.userInfo.bankusername != ''
+        filled:$scope.account.info.bankcardid != '' && $scope.account.info.bankcardid != 'null' && $scope.account.info.bankusername != null && $scope.account.info.bankusername != ''
       }
 
       //提交方法
       $scope.submit = function () {
         if (!$scope.activeState.buttonState) {//如果提交成功，不能重复提交
           if(picArr.length >= 1){
-
-
           $scope.activeState.buttonText = '上传中...';
           $scope.activeState.buttonWaite = true;
-          var url = GlobalVariable.SERVER_PATH + "Home/Index/uploadbank";
+          var url = GlobalVariable.SERVER_PATH + "info/uploadbank/";
           var parmas = {//参数
-            uid: $scope.userInfo.id,
-            rand: $scope.userInfo.rand,
-            // bankusername: $scope.bankInfo.name,
-            bank: $scope.bankInfo.whichBank,
+            id: $scope.userInfo.userid,
+            bankdeposit: $scope.bankInfo.whichBank,
+            bankusername: $scope.bankInfo.bankusername,
             bankaccount: $scope.bankInfo.whereApply,
             bankcardnumber: $scope.bankInfo.cardNumber,
             bankcardnumber1: $scope.bankInfo.repeatCardNumber,
-            data1: picArr[picArr.length - 1]
+            bankcardpic: picArr[picArr.length - 1]
           }
           // alert(angular.toJson(parmas))
         
-        postDataFty2.postData(parmas, url).then(
+        postDataFty.postData(parmas, url).then(
           function (data) {
             // alert(angular.toJson(data))
-            switch(data.error){
-              case 1:
-              Message.show('你的帐号已经其他设备上登录了');
-              $scope.activeState.buttonWaite = false;
-              $scope.activeState.buttonText = '提交';
-              break;
-
-              case 2:
-              Message.show('输入不完整，请检查后再提交');
-              $scope.activeState.buttonWaite = false;
-              $scope.activeState.buttonText = '提交';
-              break;
-
-              case 3:
-              Message.show('卡号两次不一致，请认真核对后再提交');
-              $scope.activeState.buttonWaite = false;
-              $scope.activeState.buttonText = '提交';
-              break;
-            };
-
-            if(data.ok == 0){
-               Message.show('上传成功')
+            if(data.ok){
+               Message.show('上传成功,2秒后返回', 1600,function(){
+                $timeout(function(){
+                  $ionicHistory.goBack();
+                },2000)
+               })
               $scope.activeState.buttonText = '提交成功';
               $scope.activeState.buttonWaite = false;
               $scope.activeState.buttonState = true;
@@ -99,13 +84,19 @@ angular.module('bankaccount.controller', ['ykg.services', 'global'])
                 $ionicHistory.goBack();
               }, 800);
               // alert('success'+angular.toJson(data));
+            }else if(data.error){
+              Message.show(data.error, 1600);
+              $scope.activeState.buttonText = '提交';
+              $scope.activeState.buttonWaite = false;
+              $scope.activeState.buttonState = false;
             }
            
             }, function (error) {
               Message.show('上传失败了，重试一次吧');
               $scope.activeState.buttonWaite = false;
-              $scope.activeState.buttonText = '提交';
               $scope.activeState.buttonState = false;
+              $scope.activeState.buttonText = '提交';
+              
             })
         }else{
           Message.show('请上传银行卡照片') 
@@ -121,7 +112,7 @@ angular.module('bankaccount.controller', ['ykg.services', 'global'])
       //从本地拿到图片
       $scope.getPic = function () {
         var oldData = null;
-        var promise = uploadPicFty2.activeSheet(true);
+        var promise = uploadPicFty.activeSheet(true);
         promise.then(function (data) {
           if (data != null && oldPicArr != picArr) {
             picArr.push(data);
@@ -137,5 +128,12 @@ angular.module('bankaccount.controller', ['ykg.services', 'global'])
         oldPicArr.length = picArr.length;
       }
 
+      //返回按钮
+      $scope.$on('$ionicView.beforeEnter', function(event, viewData){
+        viewData.enableBack = true;
+      })
+
+
 
     }]);
+

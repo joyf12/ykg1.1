@@ -1,0 +1,40 @@
+<ion-view id="record" view-title="提现记录">
+  <div class="row item bar-subheader con">
+    <div class="col">
+      <div class="col-demo">申请时间</div>
+    </div>
+    <div class="col">
+      <div class="col-demo">提现金额</div>
+    </div>
+    <div class="col">
+      <div class="col-demo">状态</div>
+    </div>
+    <div class="col">
+      <div class="col-demo">申请类型</div>
+    </div>
+  </div>
+
+
+  <ion-content>
+  <div class="list content has-header">
+   
+    <div class="row item" ng-repeat='item in data track by $index'>
+        <div class="col ys">
+          <div class="col-demo">{{item.time*1000 | date:'yyyy-MM-dd'}}</div>
+        </div>
+        <div class="col">
+          <div class="col-demo">{{item.money}}</div>
+        </div>
+        <div class="col ys">
+          <div class="col-demo">{{item.state | myFilter | myFilter1}}</div>
+        </div>
+        <div class="col ys">
+          <div class="col-demo">{{item.type}}</div>
+      </div>
+    </div>
+  </div>
+  <div ng-show="nomore" style="color:#ccc;text-align:center">没有更多数据</div>
+  <div ng-show="!nomore" style="color:#ccc;text-align:center">上拉加载更多</div>
+  <ion-infinite-scroll on-infinite="loadMore()" distance="1%" spinner="crescent" ng-if="!nomore" icon='ion-load-a'></ion-infinite-scroll>
+  </ion-content>
+</ion-view>

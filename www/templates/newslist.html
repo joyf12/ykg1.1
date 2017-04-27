@@ -1,0 +1,27 @@
+<ion-view id="news" view-title="头条">
+	<ion-nav-buttons side="right">
+		<button class="button button-clear" ng-click="">
+		</button>
+	</ion-nav-buttons>
+	<ion-content  has-header>
+
+		<!--顶部大头条 -->
+		<!-- <div class="list">
+			<div class="item item-image">
+				<img ng-src={{hotNews.pic}} alt="" class="full-image">
+			</div>
+			<a ng-href="#/newsContent/{{hotNews.id}}" class="item assertive">
+				<p>{{hotNews.text}}</p>
+			</a>
+		</div> -->
+
+		<div class="list">
+			<a ng-href="#/newscontent/{{newsList.id}}" class="item item-thumbnail-left" ng-repeat="newsList in news">
+				<img ng-src={{newsList.picture}} alt="">
+				<h3>{{newsList.title}}</h3>
+				<p>{{newsList.text}}</p>
+			</a>
+		</div>
+		
+	</ion-content>
+</ion-view>

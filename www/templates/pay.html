@@ -1,0 +1,28 @@
+<ion-view id="pay" view-title="支付页" cache-view="false">
+  
+  <ion-content scroll="true" class="has-header">
+    <div class="panel">
+      <p>付款金额（元）</p>
+      <h5>{{sum}}</h5>
+    </div>
+   
+
+    <ion-list>
+    <label class="item item-input item-select">
+      <div class="input-label">
+        支付方式
+      </div>
+      <select ng-model="selected" ng-change="showselect(selected)" ng-options=" item for item in accounttype">
+        <!-- <option ng-repeat="label in accounttype" >{{label}}</option> -->
+        <!-- <option value="">支付方式</option> -->
+      </select>
+    </label>
+    <!-- <p ng-repeat="label in accounttype" >{{label}}11111</p> -->
+     <div class="padding">
+      <button class="button button-assertive button-block" ng-click="pay()" ng-disabled="invalidSum">去结算</button>
+    </div> 
+  </ion-content>
+
+</ion-view>
+
+

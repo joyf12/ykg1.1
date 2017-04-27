@@ -1,0 +1,28 @@
+<ion-view id="newsContent" view-title="正文">
+	<ion-nav-buttons side="right ">
+		<button class="button button-clear" ng-click="">
+			
+		</button>
+	</ion-nav-buttons>
+	<ion-content  has-header >
+		<!--顶部大头条 -->
+		<div class="list">
+			<div class="item item-image" style="max-height:120px;width:100%;overflow: hidden;">
+				<img src="{{news.picture}}" alt="" class="full-image" style="height:auto;width:auto;">
+			</div>
+			<div class="item assertive item-body">
+				<h2 class="title">{{news.title}}</h2>
+				<hr/>
+				<p class="date">{{newsInfo.time*1000 | date:'yyyy-MM-dd'}}</p>
+				<p class="text" ng-bind-html="news.text"></p>
+				<p class="sub-tools">
+					<!-- <a href="#" class="subdued icon iconfont icon-share" >分享</a>
+					<a href="#" class="subdued icon iconfont icon-appreciate" >点赞</a> -->
+				</p>
+			</div>
+		</div>
+
+		
+		
+	</ion-content>
+</ion-view>

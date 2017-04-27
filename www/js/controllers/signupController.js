@@ -1,4 +1,4 @@
-angular.module('signupController', ['ykg.services', 'global'])
+angular.module('signupController', ['ykg.services', 'global','ionic-citypicker'])
 .controller('signupCtrl', [
 	'$scope',
 	'$interval',
@@ -8,6 +8,7 @@ angular.module('signupController', ['ykg.services', 'global'])
 	'Message',
 	'$ionicHistory',
 	'getHashFty',
+	
 	function(
 		$scope,
 		$interval,
@@ -16,7 +17,9 @@ angular.module('signupController', ['ykg.services', 'global'])
 		verificationFty,
 		Message,
 		$ionicHistory,
-		getHashFtys
+		getHashFty
+		
+		
 		){
 	$scope.bindData = {
 		nickname:null,
@@ -136,16 +139,20 @@ angular.module('signupController', ['ykg.services', 'global'])
 
 	$scope.signup = function(){
 		var url = GlobalVariable.SERVER_PATH + 'Info/register';
-		$scope.bindData.password = getHashFty.getHash($scope.bindData.password);
-		$scope.bindData.password2 = getHashFty.getHash($scope.bindData.password2);
+		
 		var params = {
 			phone:$scope.bindData.phone,
 			referphone:$scope.bindData.refer,
-			password:$scope.bindData.password,
-			password1:$scope.bindData.password2,
+			// password:$scope.bindData.password,
+			// password1:$scope.bindData.password2,
 			username:$scope.bindData.nickname,
 			code:$scope.bindData.code
 		}
+
+		params.password = getHashFty.getHash($scope.bindData.password);
+		params.password1 = getHashFty.getHash($scope.bindData.password2);
+
+		// alert(angular.toJson(params))
 
 		postDataFty.postData(params, url).then(function(data){
 			if(data.ok){
@@ -160,4 +167,12 @@ angular.module('signupController', ['ykg.services', 'global'])
 
 		})
 	}
+
+	var vm = $scope.vm = {};
+	  vm.CityPickData = {
+		areaData: ['广东省-东莞市'],
+		title: '你所在的城市',
+		hardwareBackButtonClose: false
+	  }
+
 }])

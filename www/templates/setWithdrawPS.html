@@ -1,0 +1,33 @@
+<ion-view id="changeWithdraw" class="safeSetting" view-title="修改安全码" cache-view="false">
+
+  <ion-content scroll="true" class="has-header changeWithdraw">
+    <div class="list">
+      <form name="safeForm">
+        <label class="item item-input">
+          <span class="input-label">手机号码</span>
+          <input type="number" required="required" placeholder="请输入11位数手机号码" ng-model="bindData.phone" ng-blur="checkPhoneNum()" readonly="readonly">
+          <span class="note" ng-show="phoneErr">不是有效的手机号</span>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">安全密码</span>
+          <input type="password" required="required" placeholder="请输入新的安全密码" ng-model="bindData.safeNum" ng-blur="checkSafe()">
+          <span class="note" ng-show="safeFirst">密码长度至少6位最多10位</span>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">再次输入</span>
+          <input type="password" required="required" placeholder="再次输入新的安全密码" ng-model="bindData.safeAgain" ng-blur="checkSafeAgain()">
+          <span class="note" ng-show="safeAgain">安全密码两次输入不一致</span>
+        </label>
+
+        <div class="padding">
+        <button ng-class="{'button':true, 'button-assertive':!bindData.buttonState, 'button-block':true, 'button-balanced':bindData.buttonState}" ng-disabled="safeForm.$invalid || phoneErr || safeFirst || safeAgain || bindData.buttonWaite" ng-click="setbindData()">{{bindData.changeBtnState}}</button>
+        </div>
+    </form>
+  </div>
+  </ion-content>
+
+</ion-view>
+
+

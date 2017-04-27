@@ -4,11 +4,12 @@
     <ion-list>
       <label for="" class="item item-input item-icon-right">
         <span class="input-label">支付宝账号：</span>
-        <input type="text" ng-model="account.alipay" placeholder="{{account.filled}}">
+        <input type="text" ng-model="account.alipay" placeholder="{{userInfo.info.alipay}}" ng-readonly="account.filled">
       </label>  
     </ion-list>
-    <p class="notice padding">注意：支付宝帐户必须是以你本人信息开通的帐号</p>
-    <div class="padding">
+    <p class="notice padding" ng-if="!account.filled">注意：支付宝帐户必须是以你本人信息开通的帐号</p>
+    <p class="notice padding" ng-if="account.filled">支付宝账号已认证</p>
+    <div class="padding" ng-if="!account.filled">
        <button ng-class="{'button':true, 'button-assertive':account.buttonState,'button-balanced':!account.buttonState, 'button-block':true}" on-tap="alipay()">{{account.buttonText}}</button>
     </div>
    

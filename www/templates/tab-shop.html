@@ -1,17 +1,18 @@
 <ion-view view-title="商家" id="shop" hide-nav-bar="false" class="#shop" >
   <ion-content  has-bouncing="true">
-    <ion-slides  options="options" slider="data.slider" auto-play="true">
-      <ion-slide-page style="background-color:blue ">
-        <a href=""><img src="img/ben.png" alt=""></a>
-      </ion-slide-page>
-      <ion-slide-page style="background-color:yellow ">
-        <a href=""><img src="img/ben.png" alt=""></a>
-      </ion-slide-page>
-      <ion-slide-page style="background-color: pink">
-        <a href=""><img src="img/ben.png" alt=""></a>
-      </ion-slide-page>
-    </ion-slides>
 
+    <!--头部滚动条-->
+        <div class="headerSlider" style="height:128px">
+          <div id="headerSlider" class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" ng-repeat="item in slide track by $index" on-touch="slideSrc(item.linktoshop)">
+                <img alt="{{item.alt}}" ng-src="{{item}}">
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+        
     <!-- <div class="button-bar">
       <button ng-class="{'button':true, 'button-assertive':true, 'button-light':true, 'button-active':true}">个人版</button>
       <button ng-class="{'button':true, 'button-assertive':false, 'button-light':true}">商家版</button>
@@ -64,22 +65,19 @@
 
     <!-- 附近商家 -->
     <div class="filter-lists">
-      <div ng-repeat="item in nearshops track by item.id">
-        <a ng-href="#/shopPage/{{item.id}}" class="list-card">
+      <div ng-repeat="item in nearstore track by $index">
+        <a ng-href="#/store/{{item.id}}" class="list-card">
+        
           <div class="list-photo">
             <span class="shop-label">推荐商家</span>
-            <img ng-src="{{item.shopdoor}}" alt="">
+            <img ng-src="{{item.shopicon}}" alt="">
           </div>
 
           <div class="list-text">
-        <span class="list-label">
-          推荐
-        </span>
-
+          <span class="list-label">推荐</span>
             <h4>{{item.shopname}}</h4>
             <address>地址：<span>{{item.address}}</span></address>
             <p><span>分类：</span>{{item.class}}</p>
-
             <p class="shop-ad"><span>广告：</span>{{item.shopad}}</p>
             <div class="grade">
           <span ng-repeat="temp in item.jf track by $index">

@@ -1,64 +1,78 @@
 
 angular.module('alipay.controller', ['ykg.services','global'])
   .controller('alipayCtrl', ['$scope',
-    'getDataFty',
+    'postDataFty',
     'getCurrentUserFty',
     '$state',
     'GlobalVariable',
+    'getCurrentUserFty',
+    'Message',
+    '$ionicHistory',
+    '$timeout',
+    'Storage',
     function (
     $scope,
-    getDataFty,
+    postDataFty,
     getCurrentUserFty,
     $state,
-    GlobalVariable
+    GlobalVariable,
+    getCurrentUserFty,
+    Message,
+    $ionicHistory,
+    $timeout,
+    Storage
         ) {
-        // var userInfo = getCurrentUserFty.getCurrentUser('logined');
-        var userInfo = {};
+      
+        $scope.userInfo = getCurrentUserFty.getCurrentUser();
+        $scope.userAccount = Storage.get('account');
         $scope.account = {
             alipay:null,
             buttonText:'提交',
             buttonState:true,
-            filled:userInfo.zhifubao
+            filled:$scope.userAccount.info.alipay != '' &&  $scope.userAccount.info.alipay != null,
 
         };
         
         $scope.alipay = function(){
             
             var params ={
-                uid:userInfo.id,
-                rand:userInfo.rand,
-                zfb:$scope.account.alipay?$scope.account.alipay:null
+                id:$scope.userInfo.info.userid,
+                // rand:userInfo.rand,
+                alipay:$scope.account.alipay?$scope.account.alipay:null
             } 
             // alert(angular.toJson(params))
-            var url = GlobalVariable.SERVER_PATH +' Home/Index/alipay/';
-            getDataFty.getData(params, url).then(
+            var url = GlobalVariable.SERVER_PATH +'info/alipay';
+            postDataFty.postData(params, url).then(
                 function(data){
                     if(!$scope.account.buttonState){//如果按钮变了成功，再次点击返回设置页
-                        $state.go('finishYourInfo');
+                        $ionicHistory.goBack();
+                    }else{
+                       if(data.ok){
+                           $scope.account.buttonText = '成功,2秒后返回';
+                           $scope.account.buttonState = false;
+                           Message.show('成功,2秒后返回',1600, function(){
+                            $timeout(function(){
+                                $ionicHistory.goBack();
+                            },2000)
+                           })
+
+                       }else if(data.error){
+                           Message.show(data.error, 1600);
+                            $scope.account.buttonState = true;
+                       };
+                        
                     }
-                   switch(data.error){
-                        case '1':
-                        Message.show('你的帐号已在其他设备上登录，请重新登录',1200,function(){
-                            $state.go('login')
-                        });
-                        break;
-
-                        case '2':
-                        Message.show('信息好像不完整，请检查后再提交');
-                        break;
-                    };
-
-                    if(data.state){
-                        $scope.account.buttonText = '成功，返回认证其他信息';
-                        $scope.account.buttonState = false;
-
-                    }
-
+                        
 
                 },function(error){
-                    alert('error'+error)
+                    Message.show('网络出错了，稍候再试', 1600)
+                    // alert('error'+error)
                 })
         }
+
+        $scope.$on('$ionicView.beforeEnter', function(event, viewData){
+            viewData.enableBack = true;
+        })
    
 
   }]);

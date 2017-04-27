@@ -9,6 +9,9 @@ angular.module('loginController', ['ykg.services','global'])
 	'$location',
 	'getHashFty',
 	'Storage',
+	'$ionicPlatform',
+	'$cordovaKeyboard',
+	'$timeout',
 	function(
 		$scope,
 		toggleFty,
@@ -18,7 +21,10 @@ angular.module('loginController', ['ykg.services','global'])
 		Message,
 		$location,
 		getHashFty,
-		Storage
+		Storage,
+		$ionicPlatform,
+		$cordovaKeyboard,
+		$timeout
 		){
 
 		$scope.$on('$ionicView.afterEnter', function(){
@@ -45,6 +51,7 @@ angular.module('loginController', ['ykg.services','global'])
 
 	//焦点切换
 	$scope.active = function(index){
+		zoom();
 		$scope.actions = -1;
 		if(index){
 			$scope.actions = toggleFty.actions(index);
@@ -54,7 +61,7 @@ angular.module('loginController', ['ykg.services','global'])
 	//登录
 	$scope.login = function(){
 		var url = GlobalVariable.SERVER_PATH + 'Info/login';
-		$scope.bindData.password = getHashFty.getHash($scope.bindData.password);
+		
 		// alert($scope.bindData.password)
 		var params = {
 			phone:$scope.bindData.phone,
@@ -63,26 +70,42 @@ angular.module('loginController', ['ykg.services','global'])
 
 		postDataFty.postData(params,url).then(
 			function(data){
+				// console.log(angular.toJson(data))
 				if(data.ok){
 					Message.show(data.ok,1600,function(){
-						var userinfo = {
-							name:'张三',
-							phone:'13537038207',
-							banknumber:'8888888888888',
-							type:'商家'
-						}
+						
 						$location.path('/tab/home');
-						Storage.set('userinfo',userinfo)
+						Storage.set('userinfo',data);
 
 					})
 				}else if(data.error){
 					Message.show(data.error, 1600);
 					$scope.bindData.phone = null;
 					$scope.bindData.password = null;
+					
 				}
 				// alert(angular.toJson(data))
 			},function(error){
 				//错误
 			})
 	};
+
+	// 隐藏logo
+	function zoom(){
+		$timeout(function(){
+			if($cordovaKeyboard.isVisible()){
+				$('.logo:eq(0)').animate({opacity:'0',height:'100px'}, 100);
+			}else{
+
+			}
+		},160)
+		
+	}
+
+	$scope.zoom2 = function(){
+		$('.logo:eq(0)').animate({opacity:'1',height:'200px'}, 100);
+	}
+
+	
+	
 }])

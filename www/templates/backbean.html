@@ -1,0 +1,70 @@
+<ion-view id="backbean" view-title="订单列表">
+  <ion-header-bar class="bar-zdlife" class="scroll-content">
+    <button class="button back-button button-clear button-icon icon iconfont icon-left">我的账单</button>
+  </ion-header-bar>
+  
+  <ion-content class="has-header">
+    <div class="button-bar">
+      <button class="button button-light">爱心数</button>
+      <button class="button button-light">转化率</button>
+      <button class="button button-light">购物豆</button>
+      <button class="button button-light">日期</button>
+      <!-- <button class="button button-light toggleBtn" on-touch="showTabBar()"> -->
+       
+      <!--   <ul class="selectBar " ng-hide="checked">
+          <li ng-click="getSearchTarget('商家')" on-touch="switchState('未让利')">未让利</li>
+          <li ng-click="getSearchTarget('商品')" on-touch="switchState('未审核')">未审核</li>
+          <li ng-click="getSearchTarget('商家')" on-touch="switchState('交易成功')">交易成功</li>
+        </ul> -->
+        <!-- <i class="icon iconfont icon-unfold"></i> -->
+      <!-- </button> -->
+    </div>
+    <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+      <ion-item ng-repeat="item in orderList" ng-click="collectOrder(item.price, item.backmoney, item.id)">
+        <div class="row item-remove-animate">
+        <div class="col-25">
+          <span>{{item.love}}</span>
+          </div>
+          <div class="col-25">
+          <span>{{}}</span>
+          </div>
+          <div class="col-25">
+          <span>{{item.shopbean}}</span>
+          </div>
+          <div class="col-25">
+          <span>{{item.time*1000 | date:'yyyy-MM-dd'}}</span>
+          </div>
+         <!--  <div class="col-25">
+            <span ng-if="item.status==0" class="">未让利</span>
+            <span ng-if="item.status==1" class="">未审核</span>
+            <span ng-if="item.status==2" class="">交易成功</span>
+          </div> -->
+        </div>
+        <div class="row" style="display:none" id='{{item.id}}'>
+          <div class="col-25"><span>买家:{{item.buyername}}</span></div>
+          <div class="col-25"><span>让利比例:{{item.scale}}</span></div>
+          <div class="col-25"><span>数量:{{item.count}}</span></div>
+          <div class="col-25 amount"><span>让利:{{item.backmoney}}</span></div>
+        </div>
+        <i id="{{item.id}}A" class="checked icon iconfont icon-roundcheckfill" style="display:none"></i>
+
+        <!-- 删除按钮 -->
+        <ion-option-button class="button-assertive" ng-click="deleteOrder(item.id)" ng-if="item.status==0">删除
+        </ion-option-button>
+        <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+      </ion-item>
+    </ion-list>
+
+
+    <div ng-show="nomore" style="color:#ccc;text-align:center">没有更多数据</div>
+    <div ng-show="!nomore" style="color:#ccc;text-align:center">上拉加载更多</div>
+    <ion-infinite-scroll on-infinite="loadMore()" distance="1%" spinner="crescent" ng-if="!nomore"></ion-infinite-scroll>
+  </ion-content>
+
+  <div class="bar bar-footer" ng-if="orderState == '0'">
+    <div class="button-bar" >
+      <button class="button button-balanced">金额：{{totalSum}}</button>
+      <button class="button button-assertive" ng-disabled="!totalSum" ng-click="submit()">让利￥：{{totalBackFund}}</button>
+    </div>
+  </div>
+</ion-view>

@@ -10,11 +10,11 @@
 			<form name="loginForm">
 			<label class="item item-input ion-icon-left">
 				<i ng-class="{'ion-person':true, 'focus':actions==1}"></i>
-    			<input type="number" placeholder="手机号码" ng-click="active(1)" ng-model="bindData.phone" required="required" ng-change="checkphone()">
+    			<input type="number" placeholder="手机号码" ng-click="active(1)" ng-model="bindData.phone" required="required" ng-change="checkphone()" ng-blur="zoom2()">
   			</label>
   			<label class="item item-input ion-icon-left">
   				<i ng-class="{'ion-locked':true, 'focus':actions == 2}"></i>
-    			<input type="password" placeholder="密码" ng-click="active(2)" ng-change="checkps()" ng-model="bindData.password">
+    			<input type="password" placeholder="密码" ng-click="active(2)" ng-change="checkps()" ng-model="bindData.password"  ng-blur="zoom2()">
   			</label>
 		</ion-list>
 		<div class="forgetps">

@@ -1,0 +1,38 @@
+<ion-view id="transfer" view-title="确认订单">
+    <ion-header-bar class="bar-zdlife" class="scroll-content">
+        <button class="button back-button button-clear button-icon icon iconfont icon-left">我的账单</button>
+
+    </ion-header-bar>
+    <ion-content  class="has-header">
+       <ion-list>
+        <ion-item>订单号码：{{orderNo}}</ion-item>
+        <ion-item>让利金额：{{sum}}</ion-item>
+        <ion-item>时间:{{oDate | date:'yyyy-MM-dd HH:mm:ss'}}</ion-item>
+
+        <label class="item item-input item-select">
+           <div class="input-label">
+             支付方式：
+           </div>
+           <select ng-model="checked.payType" ng-change="change()">
+             <option value="bank" selected>银行卡</option>
+             <option value="alipay"> 支付宝</option>
+             <option value="wechat">微信</option>
+           </select>
+         </label>
+
+      </ion-list>
+      <ion-list class="companyaccount">
+        
+        <ion-item ng-if="payType.bankPay">公司帐户：广东智领者网络科技有限公司</ion-item>
+        <ion-item ng-if="payType.bankPay">公司帐号：8114 8010 1430 0100 187</ion-item>
+        <ion-item ng-if="payType.bankPay">开户行：中信银行东莞石龙支行</ion-item>
+        <ion-item ng-if="payType.aliPay">支付宝：zdsh365@163.com</ion-item>
+        <ion-item ng-if="payType.wechatPay">无</ion-item>
+      </ion-list>
+        <p class="notice padding">记住以上信息，然后转款到以上账户并点击上传凭证</p>
+        <div class="padding"> <a ng-href="#/uploadlog" class="button button-block button-assertive">上传凭证</a></div>
+
+
+       
+    </ion-content>
+</ion-view>

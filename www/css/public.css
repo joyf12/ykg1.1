@@ -13,6 +13,95 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
 	font-size:12px;
 }
 
+.verificationCode button.button{
+  position: absolute;
+  right:0;
+  top:0;
+  border-radius: 0;
+}
+
+.verificationCode input{
+  width:30px;
+  right:0;
+  
+  border-radius: 0;
+  flex:0 200px;
+  -webkit-box-flex:0;
+}
+
+.android-platform .bar .title{
+  font-size:14px;
+}
+.back-button span.back-text{
+  font-size:14px;
+  color:#FFF;
+}
+
+.back-button i.icon{
+  font-size:12px;
+  color:#FFF;
+}
+
+.item-content{
+  padding:16px 0;
+}
+
+.searchTag{
+  position:absolute;
+  top:0px;
+  left:15px;
+  background: #333;
+  color:#fff;
+  padding:10px 15px;
+  z-index:12;
+}
+
+ .searchTag li{
+  height:40px;
+  color:#fff;
+  line-height: 40px;
+
+}
+
+.searchTag li + li{
+  border-top:1px solid #464646;
+}
+
+input[disabled], 
+select[disabled],
+textarea[disabled],
+input[readonly]:not(.cloned-text-input),
+textarea[readonly]:not(.cloned-text-input), 
+select[readonly]{
+  background-color: #fff;
+  cursor:not-allowed;
+  color:#999;
+}
+
+
+.selectBar li{
+  color:#fff;
+}
+ 
+.selectBar li + li{
+  border-top:1px solid #444;
+}
+div.ionic-citypicker {
+  padding-right:15px;
+  text-align:left;
+  color:#999;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+.city-picker header.bar.bar-stable{
+  background-color:#fafafa;
+}
+
+div.ionic-citypicker span{
+  color:#333;
+}
+
 .bar{
 	background-color:#979797;
 	color:#fff;
@@ -25,6 +114,7 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
 .bar  .title {
 	font-size:14px;
 }
+
 
 .nav-bar-block .bar .title{
 	color:#fff;
@@ -51,17 +141,51 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   font-size:12px;
 }
 
+.list .item .input-label{
+  font-size:12px;
+}
+
 .list .item span, .list .item p{
   font-size:12px;
 }
 
-.list .item i {
+.item i {
+  font-size:12px;
+  color:#999;
+}
+
+.list .item i::before {
   font-size:20px;
   color:#999;
 }
 
+.action-sheet-options{
+  // background-color:red;
+  // filter: blur(50px);
+  // opacity:0.8;
+  // background-color:transparent;
+  overflow: hidden;
+  position: relative;
+  background-color: #fafafa;
+}
+
+.platform-android .action-sheet-group {
+  margin-bottom:8px;
+}
+
+.platform-android .action-sheet-group .action-sheet-title {
+  text-align:center;
+}
+
+.platform-android .action-sheet .action-sheet-title, .platform-android .action-sheet .button {
+  border-color:#d1d3d6;
+}
+
 .action-sheet-wrapper .action-sheet-group button.button{
   font-size:14px;
+  display:block;
+  color:red;
+  text-align:center;
 }
 .action-sheet-wrapper .action-sheet-group .action-sheet-title{
   font-size:14px;
@@ -76,11 +200,15 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   color:#333;
 }
 
+.platform-android .action-sheet-cancel{
+  display:block;
+}
+
 .list .item-input .input-label {
   width:auto;
 }
 
-.notice {
+i.notice {
   color:red;
 }
 

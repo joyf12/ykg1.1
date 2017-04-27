@@ -1,7 +1,7 @@
-<ion-view view-title="易客购" id="home" class="home" hide-nav-bar="false">
+<ion-view view-title="易客购" id="home" class="home title-center" hide-nav-bar="false">
       <ion-content  has-bouncing="true" class="has-header">
-        <ion-slides  options="options" slider="data.slider" auto-play="true">
-          <ion-slide-page style="background-color:blue " ng-repeat="data in res track by $index">
+        <ion-slides  options="options" slider="data.slider">
+          <ion-slide-page ng-repeat="data in res track by $index">
             <a href=""><img ng-src={{data}} alt=""></a>
           </ion-slide-page> 
         </ion-slides>
@@ -12,13 +12,12 @@
           <button ng-class="{'button':true,  'button-light':actions == 1, 'button-active':current == 2}" ng-click="toggle(2)">商家版</button>
         </div>
 
-      
         <!-- 头条 -->
         <div class="news swiper-container hotnews" style="height: 80px; overflow: hidden;">
           <div class="list swiper-wrapper">
-            <a class="item item-thumbnail-left swiper-slide" ng-href="#/news" ng-repeat="data in news track by $index">
+            <a ng-href="#/newslist" class="item item-thumbnail-left swiper-slide" ng-href="#/news" ng-repeat="data in news track by $index">
               <img ng-src={{data.picture}}>
-              <div class="text">
+              <div ng-href="#/newslist" class="text">
                 <p><i class="icon badge badge-light">头条</i>{{data.title}}</p>
                 <p><i class="icon badge badge-light">头条</i>{{data.title}}</p>
               </div>
@@ -26,17 +25,16 @@
           </div>
         </div>
 
-        <div class="commend padding">
+
+        <div class="commend padding" style="height:auto">
           <h5 class="text-center">商家推荐</h5>
-          <a href="#">
+         <!--  <a ng-href="">
           <img src="img/ben.png" alt="">
-          </a>
+          </a> -->
         </div>
 
         <div class="gridArea padding">
-          <a ng-href="#/store" ng-repeat="data in goodsList track by $index"><img ng-src={{data.shopicon}} alt=""></a>
-         
-
+          <a ng-href="#/store/{{data.id}}" ng-repeat="data in goodsList track by $index"><img ng-src={{data.shopicon}} alt=""></a>
         </div>
       </ion-content>
 </ion-view>

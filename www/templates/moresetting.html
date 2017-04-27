@@ -1,0 +1,61 @@
+<ion-view id="moresetting" view-title="设置" cache-view="false">
+
+  <ion-content scroll="true" class="has-header">
+    <ion-list>
+
+     <!--  <ion-item class="item item-toggle item-icon-left">
+        <i class="icon iconfont icon-wifi"></i>
+        非wifi下使用省流量模式
+        <label class="toggle toggle-balanced">
+          <input type="checkbox">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </ion-item> -->
+
+      <ion-item class="item-icon-left item-icon-right" ng-click="">
+        <i class="icon iconfont icon-loading"></i>
+        <i class="icon">0k</i>
+
+        清除缓存
+      </ion-item>
+
+      <a ng-href="#/suggest" class="item-icon-left item item-icon-right">
+        <i class="icon iconfont icon-service"></i>
+        <i class="icon iconfont icon-right"></i>
+
+        意见反馈
+      </a>
+
+      <a href="#/help" class="item-icon-left item item-icon-right">
+        <i class="icon iconfont icon-pay"></i>
+        <i class="icon iconfont icon-right"></i>
+
+        支付帮助
+      </a>
+
+      <ion-item class="item-icon-left item-icon-right" ng-click="uploadVersion()">
+        <i class="icon iconfont icon-down"></i>
+        <i class="icon">当前版本{{appVersion}}</i>
+        检查更新
+      </ion-item>
+
+      <a ng-href="#/aboutUs" class="item-icon-left item item-icon-right">
+        <i class="icon iconfont icon-news"></i>
+        <i class="icon iconfont icon-right"></i>
+        关于益可购
+      </a>
+
+      
+
+    </ion-list>
+    <div class="padding">
+      <a ng-href="javascript:(void);" ng-click="loginout()" class="button button-block button-assertive">注销帐户{{userPhone}}</a>
+    </div>
+   
+  </ion-content>
+
+</ion-view>
+
+

@@ -1,41 +1,23 @@
 <ion-view view-title="橱窗" id="showcase" hide-nav-bar="false">
 	<ion-content class="padding" has-bounds="true">
 		<ul class="row">
-			<li class="col-50">
-				<a href="#/">
-					<img src="img/ben.png" alt="">
+			<li class="col-50" ng-repeat="data in res" >
+				<div class="wrap">
+				<a href="javascript:void(0)" ng-click="selectGoods($index, data.produceid)">
+					<img ng-src={{data.produce}} alt="">
 				</a>
-				<p>明星同款</p>
-				<span>1999.00</span>
+				<p>{{data.producename}}</p>
+				<span>{{data.price}}</span>
+				<i class="choose icon iconfont icon-check" ng-if="$index == index[$index]"></i>
+				</div>
 			</li>
 
-			<li class="col-50">
-				<a href="#/">
-					<img src="img/ben.png" alt="">
-				</a>
-				<p>明星同款</p>
-				<span>1999.00</span>
-			</li>
-
-			<li class="col-50">
-				<a href="#/">
-					<img src="img/ben.png" alt="">
-				</a>
-				<p>明星同款</p>
-				<span>1999.00</span>
-			</li>
-
-			<li class="col-50">
-				<a href="#/">
-					<img src="img/ben.png" alt="">
-				</a>
-				<p>明星同款</p>
-				<span>1999.00</span>
-			</li>
+			
 		</ul>
 		<div class="button-bar">
-			<button class="button button-balanced">总价￥</button>
-			<button class="button button-assertive" ng-click="purchase()">购买</button>
+			<button class="button button-positive" ng-click="addcart()">加入购物车（{{basketquatity}}）</button>
+			<butotn  class="button button-assertive" ng-click="purchase()">立即购买</butotn>
+			
 		</div>
 	</ion-content>
 </ion-view>

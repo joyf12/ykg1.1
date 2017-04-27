@@ -1,4 +1,4 @@
-angular.module('ykg.services', ['ionic'])
+angular.module('ykg.services', ['ionic', 'ngCordova'])
 
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
@@ -95,12 +95,12 @@ angular.module('ykg.services', ['ionic'])
 .factory('popupFty', ['$ionicPopup', '$q', function ($ionicPopup, $q) {
   return {
       // 弹出提示框
-      AlertPopup:function(title, message, callback){//title 标题, message 信息体， callback回调
+      AlertPopup:function(title, message,confirm, callback){//title 标题, message 信息体，confirm确认 callback回调
         var alertPopup = $ionicPopup.alert({
           title: title = title ? title : '提示',
           template: message,
           okType:'button-assertive',
-          okText:'确定'
+          okText:confirm
         });
         alertPopup.then(function(res) {
          callback() != null?callback:null;
@@ -157,13 +157,13 @@ angular.module('ykg.services', ['ionic'])
         ]
       });
 
-      confirmPopup.then(function(res) {
+       confirmPopup.then(function(res) {
          if(res) {
            console.log('You are sure');
          } else {
            console.log('You are not sure');
          }
-      });
+       });
 
      }
 
@@ -313,6 +313,7 @@ angular.module('ykg.services', ['ionic'])
       }
     },
     loading: function () {
+      alert(1111);
       var text = arguments[0] ? arguments[0] : '';
       $ionicLoading.hide();
       $ionicLoading.show({
@@ -335,20 +336,20 @@ angular.module('ykg.services', ['ionic'])
       phoneNumber:function(n){
         // 检查用户手机号是否符合
         if(!(/^1[34578]\d{9}$/.test(n))){
-            return true;
-          }else{
-            return false;
+          return true;
+        }else{
+          return false;
         };
       },
 
       //密码验证
       password:function(n){
         if(!(/^[a-zA-Z0-9]{6,10}$/.test(n))){
-              return true;
-            }else{
-              return false;
-            };
-          },
+          return true;
+        }else{
+          return false;
+        };
+      },
 
       // 邮箱验证
       email:function(n){
@@ -596,12 +597,88 @@ angular.module('ykg.services', ['ionic'])
 
 //获取当前用户上
 .factory('getCurrentUserFty',function(Storage){
+  
   return {
     getCurrentUser:function(){
-      var currentUser = angular.fromJson(Storage.get('logined'));
+      var currentUser = angular.fromJson(Storage.get('userinfo'));
       return currentUser;
     }
   }
+})
+
+//导航定位
+.factory('locationFty', function(Storage,sessionFty){
+  return {
+    location: function(){
+    // 定位功能
+      var localtionInfo = {
+        city: null
+      }
+      var citySearch = new AMap.CitySearch();
+      citySearch.getLocalCity(function (status, result) {
+
+        if(result != null || result != ''){
+          Storage.set('location', result);
+         }else{//如果定位失败，就自动定位到公司总部
+          Message.show('定位失败了，现使用默认的地址',1200);
+          var bounds = {};
+          Storage.set('location', {city:'东莞市',bounds:{lng:113.720536,lat:22.988164}, deft:true});
+        };
+        var citybounds = result.bound;
+      });
+
+      //定位用户的经纬度
+      var mapObj = new AMap.Map('container');
+      mapObj.plugin('AMap.Geolocation', function () {
+        geolocation = new AMap.Geolocation({
+          enableHighAccuracy: true,//是否使用高精度定位，默认:true
+          timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+          maximumAge: 0,           //定位结果缓存0毫秒，默认：0
+          convert: true,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+          showButton: true,        //显示定位按钮，默认：true
+          noGeoLocation:0,          //使用浏览器定位，默认：true
+          buttonPosition: 'LB',    //定位按钮停靠位置，默认：'LB'，左下角
+          buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+          showMarker: true,        //定位成功后在定位到的位置显示点标记，默认：true
+          showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
+          panToLocation: true,     //定位成功后将定位到的位置作为地图中心点，默认：true
+          zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+          useNative: true,           //是否使用安卓定位sdk用来进行定位
+          noIpLocate: 1              //是否允许使用ip定位，0：可以，1：手机设备不能，2：pc设备也不能，3：所以设备不能
+        });
+
+        mapObj.addControl(geolocation);
+        geolocation.getCurrentPosition();
+        geolocation.watchPosition();
+        geolocation.getCityInfo(function(status,result){
+          // alert(angular.toJson(result));
+          localtionInfo.city = result.city.substring(0, result.city.length - 1);//去掉城市名中的'市'字，
+          // alert(localtionInfo.city)
+        })
+
+        AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+        AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+      });
+
+      //成功得到经纬度,只有首次登录时能得到值，如果刷新页面，可能读不到值，
+      function onComplete(data) {
+        data.position.getLng();
+        data.position.getLat();
+        var coordinate = {
+          lng:data.position.getLng(),
+          lat:data.position.getLat()
+        }
+        sessionFty.set('coordinate',coordinate)//把坐标存起页面临时缓存
+      };
+
+      // 获取用户经纬度失败
+      function onError(error) {
+        console.log('高精度定位失败了,'+angular.toJson(error))
+      }
+      return localtionInfo;
+  }
+}
+
 })
 
 
